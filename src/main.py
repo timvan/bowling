@@ -1,16 +1,22 @@
+import typer
+
+
 class Game:
     def __init__(self, score_sheet: str):
-        self.score_sheet = score_sheet.split(" ")
-        self.frames: list[Frame] = []
+        self.score_sheet = score_sheet
+        self.frames: list[Frame] = [Frame()]
 
         self.calculate_score()
 
     def calculate_score(self):
-        for f in self.score_sheet:
-            self.frames.append(Frame())
-            for roll in f:
-                for frame in self.frames:
-                    frame.take_roll(roll)
+        for c in self.score_sheet:
+            if c == " ":
+                self.frames.append(Frame())
+            else:
+                self.add_roll(c)
+
+    def add_roll(self, roll: str):
+        [f.take_roll(roll) for f in self.frames]
 
     def score(self):
         return sum([f.score for f in self.frames])
@@ -68,3 +74,7 @@ class Frame:
 def score(score_sheet: str):
     game = Game(score_sheet)
     return game.score()
+
+
+if __name__ == "__main__":
+    typer.run(score)
