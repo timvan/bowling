@@ -14,7 +14,7 @@ jobs:
     runs-on: ubuntu-latest
     defaults:
       run:
-        working-directory: src
+        working-directory: bowling
 
     steps:
       - uses: actions/checkout@v4
@@ -25,5 +25,5 @@ jobs:
       - name: Install uv
         uses: astral-sh/setup-uv@v5
       - name: Run unit tests
-        run: uv run pytest tests
+        run: PYTHONPATH=src:test uv run pytest tests
 
