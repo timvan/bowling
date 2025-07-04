@@ -22,5 +22,5 @@ jobs:
       - name: Install uv
         uses: astral-sh/setup-uv@v5
       - name: Run unit tests
-        run: PYTHONPATH=src:test uv run pytest tests
+        run: uv run pytest tests
 
